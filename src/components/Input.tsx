@@ -1,27 +1,32 @@
-import { FC, ReactNode } from "react";
+import React, { ChangeEventHandler, ReactNode } from "react";
+import { FC } from "react";
 
 interface InputProps {
-  errorText?: ReactNode;
-  label?: ReactNode;
-  value?: ReactNode;
+  errorText?: string;
+  label?: string;
+  value?: string;
   iconEnd?: ReactNode;
   iconStart?: ReactNode;
+  id: string;
+  onChange?: ChangeEventHandler;
 }
 
 const Input: FC<InputProps> = ({
   errorText,
+  iconEnd,
+  iconStart,
+  id,
   label,
+  onChange,
   value,
-  iconEnd = <Placeholder />,
-  iconStart = <Placeholder />,
 }) => (
-  <>
-    {errorText}
-    {label}
-    {value}
-    {iconEnd}
+  <div className="field">
+    <label htmlFor={id}>{label}</label>
     {iconStart}
-  </>
+    <input type="text" value={value} onChange={onChange} />
+    {iconEnd}
+    <span className="error">{errorText}</span>
+  </div>
 );
 
 export default Input;
